@@ -4,7 +4,7 @@ namespace WebApplication1;
 public static class Database
     {
         public static List<User> users = new List<User>();
-
+    //hello
 
 
         public static void Insert(User user)

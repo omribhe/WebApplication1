@@ -2,6 +2,10 @@
 using System.Net;
 using WebApplication1.Models;
 
+using System;
+using System.IO;
+using System.Text;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApplication1.Controllers
@@ -32,6 +36,7 @@ namespace WebApplication1.Controllers
                 base.Response.StatusCode = (int)HttpStatusCode.OK;
                 return c.messages;
             }
+
 
 
         }
@@ -67,9 +72,25 @@ namespace WebApplication1.Controllers
             }
         }
 
+
+
+        public class TransferBody
+        {
+            public string from { get; set; }
+            public string to { get; set; }
+
+            public string content { get; set; }
+        }
+
+        
+        public class stringMessage
+        {
+            public string content { get; set; }
+        }
+
         // POST api/<MessagesController>
         [HttpPost]
-        public void Post(string username, string contact, [FromBody] string content)
+        public void Post(string username, string contact, [FromBody] stringMessage content)
         {
             User u = Database.users.Find(x => x.Name == username);
             if (u == null)
@@ -82,7 +103,7 @@ namespace WebApplication1.Controllers
                 base.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
             }
-            Database.addTransfer(username, contact, content);
+            Database.addTransfer(username, contact, content.content);
             base.Response.StatusCode = (int)HttpStatusCode.Created;
         }
 
@@ -136,7 +157,10 @@ namespace WebApplication1.Controllers
             else
             {
                 c.messages.Remove(m);
-                c.last = c.messages.Last().content;
+                if (c.messages.Count(x=> x!= null) != 0)
+                    c.last = c.messages.Last().content;
+                else
+                    c.last = null;
                 base.Response.StatusCode = (int)HttpStatusCode.NoContent;
             }
         }

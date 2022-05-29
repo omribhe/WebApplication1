@@ -91,9 +91,16 @@ namespace WebApplication1.Controllers
             }
             else
             {
+                if (!u.Contacts.Exists(x => x.id == userContact.contact)) { 
                 Database.addContactFromString(username, userContact.contact, userContact.nickName, userContact.server);
+                base.Response.StatusCode = (int)HttpStatusCode.Created;
+                }
+                else
+                {
+                    base.Response.StatusCode = (int)HttpStatusCode.NotFound;
+
+                }
             }
-            base.Response.StatusCode = (int)HttpStatusCode.Created;
         }
 
 
