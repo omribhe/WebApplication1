@@ -83,12 +83,12 @@ public static class Database
             }
         }
 
-        public static void addTransfer(string username, string contactName, string mess)
+        public static void addTransfer(string username, string contactName, string mess, bool sent)
         {
             DateTime d = DateTime.Now;
             string time = d.ToString();
             Contact c = Database.users.Find(x => x.Name == username).Contacts.Find(x => x.id == contactName);
-            Message message = new Message(c.countMessages, mess, time, false);
+            Message message = new Message(c.countMessages, mess, time, sent);
             c.messages.Add(message);
             c.last = mess;
             c.lastdate = time;

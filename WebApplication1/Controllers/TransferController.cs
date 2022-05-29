@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
             {
                 if (u.Contacts.Exists(x => x.id == postTransfer.from))
                 {
-                    Database.addTransfer(postTransfer.to, postTransfer.from, postTransfer.content);
+                    Database.addTransfer(postTransfer.to, postTransfer.from, postTransfer.content, false);
                     base.Response.StatusCode = (int)HttpStatusCode.Created;
                 }
                 else
