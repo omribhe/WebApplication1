@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +21,14 @@ namespace WebApplication1.Controllers
         [HttpGet("{name}")]
         public User Get(string name)
         {
+            if (Database.users.Exists(x => x.Name == name))
+            {
+                base.Response.StatusCode = (int)HttpStatusCode.OK;
+            } 
+            else
+            {
+                base.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
             return Database.users.Find(x => x.Name == name);
         }
         public class CreateAccount
@@ -35,16 +44,23 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public void Post([FromBody] CreateAccount c)
         {
-            User u = new User();
-            u.Name = c.name;
-            u.Nickname = c.nickname;
-            u.Picture = c.picture;
-            u.Password = c.password;
-            u.Server = c.server;
-            u.Contacts = new List<Contact>();
-            Database.users.Add(u);
+            if (!Database.users.Exists(x => x.Name == c.name))
+            {
+                User u = new User();
+                u.Name = c.name;
+                u.Nickname = c.nickname;
+                u.Picture = c.picture;
+                u.Password = c.password;
+                u.Server = c.server;
+                u.Contacts = new List<Contact>();
+                Database.users.Add(u);
+                base.Response.StatusCode = (int)HttpStatusCode.OK;
 
-
+            }
+            else
+            {
+                base.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
         }
 
         // PUT api/<UserController>/5

@@ -5,33 +5,7 @@ public static class Database
     {
         public static List<User> users = new List<User>();
 
-        public static void createDatabase()
-        {
 
-            //---------------------------------------------------------------------------//
-            List<Contact> contacts2 = new List<Contact>();
-
-            User uri = new User("uri", "uri", "Omri123!", "localhost:3092", "", contacts2);
-            users.Add(uri);
-
-            User omri = new User("omri", "omri", "Omri123!", "localhost:3092", " ", new List<Contact>());
-            users.Add(omri);
-
-        Contact uriContact = new Contact("uri", "uri", "", "localhost:3092", "");
-        Contact omriContact = new Contact("omri", "omri", "", "localhost:3092", "");
-        uri.Contacts.Add(omriContact);
-        omri.Contacts.Add(uriContact);
-
-        Database.addTransfer("uri", "omri", "message1");
-        Database.addTransfer("uri", "omri", "message2");
-        Database.addTransfer("omri", "uri", "message1");
-        Database.addTransfer("omri", "uri", "message2");
-
-
-            //--------------------------------------------------------------------------//
-
-
-        }
 
         public static void Insert(User user)
         {
