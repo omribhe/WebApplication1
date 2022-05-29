@@ -31,10 +31,18 @@ namespace WebApplication1.Controllers
             public string server { get; set; }
         }
 
+        public class Login
+        {
+            public string username { get; set; }
+            public string password { get; set; }
+        }
+
+
         // POST api/<UserController>
         [HttpPost]
         public void Post([FromBody] CreateAccount c)
         {
+
             User u = new User();
             u.Name = c.name;
             u.Nickname = c.nickname;
@@ -43,8 +51,6 @@ namespace WebApplication1.Controllers
             u.Server = c.server;
             u.Contacts = new List<Contact>();
             Database.users.Add(u);
-
-
         }
 
         // PUT api/<UserController>/5
