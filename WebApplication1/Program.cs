@@ -1,8 +1,12 @@
 
+using Microsoft.AspNetCore.SignalR;
+using WebApplication1.Hubs;
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<MyHub>(new MyHub());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,7 +27,7 @@ builder.Services.AddCors(options =>
                       }
                       );
 });
-
+builder.Services.AddSignalR();
 var app = builder.Build();
 //WebApplication1.Database.createDatabase();
 
@@ -36,9 +40,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHub<MyHub>("/myHub");
+    });
 
 app.Run();

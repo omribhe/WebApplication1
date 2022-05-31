@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using WebApplication1.Models;
+using WebApplication1.Hubs;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,7 +11,14 @@ namespace WebApplication1.Controllers
     [Route("api/invitations")]
     [ApiController]
     public class InvitationsController : ControllerBase
+
     {
+        private readonly MyHub _hub;
+
+        public InvitationsController(MyHub hub)
+        {
+            _hub = hub;
+        }
         public class InvitationsJson
         {
             public string from { get; set; }
@@ -37,6 +46,8 @@ namespace WebApplication1.Controllers
                 }
                 base.Response.StatusCode = (int)HttpStatusCode.Created;
             }
+            _hub.SendMessage(invitationsJson.from, invitationsJson.to, invitationsJson.server);
+            
         }
     }
 }

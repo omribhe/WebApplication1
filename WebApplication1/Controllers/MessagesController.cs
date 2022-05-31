@@ -103,7 +103,7 @@ namespace WebApplication1.Controllers
                 base.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
             }
-            Database.addTransfer(username, contact, content.content);
+            Database.addTransfer(username, contact, content.content, true);
             base.Response.StatusCode = (int)HttpStatusCode.Created;
         }
 
