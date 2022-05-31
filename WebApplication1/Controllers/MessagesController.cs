@@ -157,10 +157,17 @@ namespace WebApplication1.Controllers
             else
             {
                 c.messages.Remove(m);
-                if (c.messages.Count(x=> x!= null) != 0)
+                if (c.messages.Count(x => x != null) != 0)
+                {
                     c.last = c.messages.Last().content;
+                    c.lastdate = null;
+                }
                 else
+                {
                     c.last = null;
+                    c.lastdate = c.messages.Last().created;
+                }
+
                 base.Response.StatusCode = (int)HttpStatusCode.NoContent;
             }
         }
