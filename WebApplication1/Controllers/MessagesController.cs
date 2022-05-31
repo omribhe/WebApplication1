@@ -160,12 +160,12 @@ namespace WebApplication1.Controllers
                 if (c.messages.Count(x => x != null) != 0)
                 {
                     c.last = c.messages.Last().content;
-                    c.lastdate = null;
+                    c.lastdate = c.messages.Last().created;
                 }
                 else
                 {
                     c.last = null;
-                    c.lastdate = c.messages.Last().created;
+                    c.lastdate = null;
                 }
 
                 base.Response.StatusCode = (int)HttpStatusCode.NoContent;
