@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using WebApplication1.Models;
+using WebApplication1.Hubs;
+
 
 using System;
 using System.IO;
@@ -14,6 +16,13 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
+
+        private readonly MyHub _hub;
+
+        public MessagesController(MyHub hub)
+        {
+            _hub = hub;
+        }
         // GET: api/<MessagesController>
         [HttpGet]
         public IEnumerable<Message> Get(string username, string contact)
@@ -36,7 +45,6 @@ namespace WebApplication1.Controllers
                 base.Response.StatusCode = (int)HttpStatusCode.OK;
                 return c.messages;
             }
-
 
 
         }
@@ -105,6 +113,7 @@ namespace WebApplication1.Controllers
             }
             Database.addTransfer(username, contact, content.content, true);
             base.Response.StatusCode = (int)HttpStatusCode.Created;
+            _hub.SendMessage("", "", "");
         }
 
         // PUT api/<MessagesController>/5

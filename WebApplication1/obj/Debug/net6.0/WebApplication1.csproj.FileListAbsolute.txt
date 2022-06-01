@@ -53,3 +53,4 @@ C:\Users\user\OneDrive - Bar-Ilan University\Desktop\newRepWeb\WebApplication1\o
 C:\Users\user\OneDrive - Bar-Ilan University\Desktop\newRepWeb\WebApplication1\obj\Debug\net6.0\WebApplication1.genruntimeconfig.cache
 C:\Users\user\OneDrive - Bar-Ilan University\Desktop\newRepWeb\WebApplication1\obj\Debug\net6.0\ref\WebApplication1.dll
 C:\Users\user\OneDrive - Bar-Ilan University\Desktop\newRepWeb\WebApplication1\bin\Debug\net6.0\libman.json
+C:\Users\PC\source\repos\WebAppServer\newRepWeb\newRepWeb\WebApplication1\bin\Debug\net6.0\libman.json

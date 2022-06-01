@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using WebApplication1.Models;
+using WebApplication1.Hubs;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApplication1.Controllers
@@ -9,6 +10,14 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
+
+        private readonly MyHub _hub;
+
+        public ContactsController(MyHub hub)
+        {
+            _hub = hub;
+        }
+
         public class ContactTemp
         {
             public string id { get; set; }
@@ -101,6 +110,7 @@ namespace WebApplication1.Controllers
 
                 }
             }
+            _hub.SendMessage("", "", "");
         }
 
 

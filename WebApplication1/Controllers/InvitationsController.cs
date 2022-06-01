@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
                 }
                 base.Response.StatusCode = (int)HttpStatusCode.Created;
             }
-            _hub.SendMessage(invitationsJson.from, invitationsJson.to, invitationsJson.server);
+            _hub.SendContact(invitationsJson.from, invitationsJson.to, invitationsJson.server);
             
         }
     }

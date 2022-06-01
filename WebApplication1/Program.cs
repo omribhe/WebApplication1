@@ -47,7 +47,7 @@ app.MapControllers();
 
 app.UseEndpoints(endpoints =>
     {
-        endpoints.MapHub<MyHub>("/myHub");
+        endpoints.MapHub<MyHub>("/MyHub");
     });
 
 app.Run();
