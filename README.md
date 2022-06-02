@@ -4,4 +4,4 @@ WebApplication1
 # Omri Ben Hemo 313255242
 
 Server side for the whatsapp app.
-Instructions for running the full project will be found in the repository containing the back end side, including a video of how to run the code.
+Instructions for running the full project will be found in the repository containing the front end side, including a video of how to run the code.
